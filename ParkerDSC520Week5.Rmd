@@ -1,0 +1,25 @@
+Using either the same dataset(s) you used in the previous weeks’ exercise or a brand-new dataset of your choosing, perform the following transformations (Remember, anything you learn about the Housing dataset in these two weeks can be used for a later exercise!)
+Using the dplyr package, use the 6 different operations to analyze/transform the data - GroupBy, Summarize, Mutate, Filter, Select, and Arrange – Remember this isn’t just modifying data, you are learning about your data also – so play around and start to understand your dataset in more detail
+```{r}
+
+```
+
+
+Using the purrr package – perform 2 functions on your dataset.  You could use zip_n, keep, discard, compact, etc.
+```{r}
+
+```
+
+
+Use the cbind and rbind function on your dataset
+```{r}
+
+```
+
+
+Split a string, then concatenate the results back together
+
+```{r}
+
+```
+
