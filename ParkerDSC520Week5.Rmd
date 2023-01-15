@@ -1,6 +1,20 @@
 Using either the same dataset(s) you used in the previous weeks’ exercise or a brand-new dataset of your choosing, perform the following transformations (Remember, anything you learn about the Housing dataset in these two weeks can be used for a later exercise!)
+```{r}
+library(readxl)
+setwd("C:/Users/brean/OneDrive/Desktop/NucampFolder/projects/dsc520-1")
+housing_data = read_excel("data/week-7-housing.xlsx")
+print(housing_data)
+```
+
 Using the dplyr package, use the 6 different operations to analyze/transform the data - GroupBy, Summarize, Mutate, Filter, Select, and Arrange – Remember this isn’t just modifying data, you are learning about your data also – so play around and start to understand your dataset in more detail
 ```{r}
+library(dplyr)
+
+by_bedrooms <- housing_data %>% group_by(bedrooms)
+
+
+
+
 
 ```
 
