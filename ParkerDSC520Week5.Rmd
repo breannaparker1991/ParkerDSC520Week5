@@ -1,3 +1,8 @@
+---
+output:
+  word_document: default
+  html_document: default
+---
 Using either the same dataset(s) you used in the previous weeks’ exercise or a brand-new dataset of your choosing, perform the following transformations (Remember, anything you learn about the Housing dataset in these two weeks can be used for a later exercise!)
 ```{r}
 library(readxl)
@@ -10,10 +15,29 @@ Using the dplyr package, use the 6 different operations to analyze/transform the
 ```{r}
 library(dplyr)
 
-by_bedrooms <- housing_data %>% group_by(bedrooms)
+colnames(housing_data)[2] <- "sale_price"
+colnames(housing_data)[14] <- "square_feet"
+colnames(housing_data)[1] <- "sale_date"
+
+bedrooms_group <- housing_data %>% group_by(bedrooms)
+print(bedrooms_group)
+
+year <- filter(housing_data, year_built == 1933)
+print(year)
+
+a <- housing_data %>% summarize(mean(bedrooms))
+print(a)
+
+c <- select(housing_data, square_feet, bedrooms, year_built, sale_price)
+g <- select(housing_data, sale_date, ctyname, bath_full_count, sq_ft_lot)
+print(c)
+
+h <- c %>% mutate(price_per_sq = (sale_price / square_feet))
+print(h)
 
 
-
+d <- arrange(c, sale_price, year_built)
+print(d)
 
 
 ```
@@ -21,12 +45,43 @@ by_bedrooms <- housing_data %>% group_by(bedrooms)
 
 Using the purrr package – perform 2 functions on your dataset.  You could use zip_n, keep, discard, compact, etc.
 ```{r}
+library(purrr)
+#f <- keep(housing_data, starts_with("s"))
+#discard()
+
+#housing_data %>% map(function(x) sum(x, na.rm=TRUE))
+
+#f <- housing_data %>% keep(~ .$bath_full_count >= 2)
+
+#f <- housing_data %>% keep(~ get_element(housing_data, "bath_full_count") >= 2)
+
+#could not get keep to work for some reason??? if you know what I'm doing wrong, please let me know! 
+
+f <- housing_data %>% mutate(sales = compact(sale_price))
+n <- keep(housing_data$sale_price, ~.x > 100000)
+
+print(f)
+print(n)
+
+#j <- c %>% discard(sitetype)
+#could also not figure out discard
+
+#print(j)
 
 ```
 
 
 Use the cbind and rbind function on your dataset
 ```{r}
+c_bind <- cbind(c,g)
+#print(c_bind)
+#removed these two print functions because it made my homework 500+ pages but they worked! 
+
+new_row <- c("2170", "4", "1970", "730000")
+
+r_bind <- rbind(c, new_row)
+#print(r_bind)
+
 
 ```
 
@@ -34,6 +89,16 @@ Use the cbind and rbind function on your dataset
 Split a string, then concatenate the results back together
 
 ```{r}
+library(stringr)
+
+split_string <- str_split(string = year$ctyname, "&")
+split_string2 <- str_split(string = year$sale_date, '&')
+print(split_string)
+print(split_string2)
+
+paste_string <- paste(split_string, split_string2)
+print(paste_string)
+
 
 ```
 
